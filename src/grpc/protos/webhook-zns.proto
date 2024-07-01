@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package vn.techres.microservice.grpc.nestjs_webhook_zns;
+
+service ZnsWebhookService {
+    rpc AuthenticationCode(AuthenticationCodeRequest) returns (BaseResponseZns) {};
+    rpc Tracking(TrackingRequest) returns (BaseResponseZns) {};
+}
+
+message AuthenticationCodeRequest {
+	string code = 1;
+	string oa_id = 2;
+}
+
+message TrackingRequest {
+	string code = 1;
+	string oa_id = 2;
+}
+
+message BaseResponseZns {
+    int32 status = 1;
+    string message = 2;
+    Empty data = 3;
+}
+
+message Empty {
+}

@@ -1,0 +1,63 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package vn.techres.microservice.grpc.nestjs_zns_campagin;
+
+service ZNSCampaignService {
+  rpc CreateZnsCampaign(CreateZnsCampaignRequest) returns (BaseResponse) {};
+  rpc UpdateZnsCampaign(CreateZnsCampaignRequest) returns (BaseResponse) {};
+  rpc UpdateRefreshToken(UpdateRefreshTokenRequest) returns (BaseResponse) {};
+  rpc UpdateZnsCampaignStatus(UpdateZnsCampaignStatusRequest) returns (BaseResponse) {};
+  rpc UpdateAuthenticationCode(AuthenticationCodeRequest) returns (BaseResponse) {};
+}
+
+message AuthenticationCodeRequest {
+	string code = 1;
+	string oa_id = 2;
+}
+
+message CreateZnsCampaignRequest {
+  int32 id = 1;
+  int32 restaurant_id = 2;
+  int32 restaurant_brand_id = 3;
+  string name = 4;
+  string template_id = 5;
+  TemplateDataRequest template_data = 6;
+  string send_at = 7;
+  int32 running_status = 8;
+  int32 message_recipient = 9;
+  repeated PhoneDataRequest phones = 10;
+  string authentication_code = 11;
+  string refresh_token = 12;
+}
+
+message UpdateZnsCampaignStatusRequest {
+  int32 id = 1;
+  int32 status = 2;
+  string failed_note = 3;
+}
+
+message UpdateRefreshTokenRequest {
+  int32 id = 1;
+  string refresh_token = 2;
+}
+
+message TemplateDataRequest {
+  string id = 1;
+  string date = 2;
+  string customer_name = 3;
+}
+
+message BaseResponse {
+  int32 status = 1;
+  string message = 2;
+  EmptyResponse data = 3;
+}
+
+message PhoneDataRequest {
+  string phone = 1;
+  string name = 2;
+}
+
+
+message EmptyResponse {
+}
